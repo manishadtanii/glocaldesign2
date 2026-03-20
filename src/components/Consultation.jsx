@@ -28,7 +28,7 @@ const data = [
 const Consultation = () => {
   const containerRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
@@ -48,31 +48,31 @@ const Consultation = () => {
   });
 
   return (
-    <section 
-      ref={containerRef} 
+    <section
+      ref={containerRef}
       className="relative h-[250vh] bg-white w-full z-40" // Using 250vh for 120vh sticky height feel
     >
       <div className="sticky top-0 h-screen w-full flex items-start justify-center px-6 md:px-12 lg:px-24 pt-20">
-        
+
         <div className="grid grid-cols-12 gap-16 items-start w-full max-w-[140rem]">
-          
+
           {/* 1. Left Image: Height 100vh */}
           <div className="col-span-12 lg:col-span-6 relative h-[75vh] xl:h-[85vh] overflow-hidden rounded-md bg-gray-50 border border-gray-100 shadow-sm">
             {data.map((item, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
                 className="absolute inset-0"
                 initial={false}
-                animate={{ 
+                animate={{
                   opacity: activeIndex === index ? 1 : 0,
                   scale: activeIndex === index ? 1.05 : 1
                 }}
                 transition={{ duration: 0.8, ease: "easeInOut" }}
               >
-                <img 
-                  src={item.image} 
-                  alt={item.title} 
-                  className="w-full h-full object-cover"
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover object-bottom"
                 />
                 <div className="absolute top-12 left-12 z-40">
                   <span className="text-white text-3xl font-urbanist italic font-semibold tracking-[0.05em] mix-blend-difference">
@@ -86,7 +86,7 @@ const Consultation = () => {
           {/* 2. Middle Text: Top Aligned */}
           <div className="col-span-12 lg:col-span-4 min-h-[500px] relative flex flex-col gap-12 pt-12">
             <AnimatePresence mode="wait">
-              <motion.div 
+              <motion.div
                 key={activeIndex}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -97,11 +97,11 @@ const Consultation = () => {
                 <h2 className="text-5xl lg:text-4xl xl:text-[2rem] font-urbanist font-medium leading-[1.2] text-gray-800">
                   <span className="text-[#FF6123]">
                     {data[activeIndex].heading.split(' ').slice(0, 2).join(' ')}
-                  </span> 
+                  </span>
                   <br />
                   {data[activeIndex].heading.split(' ').slice(2).join(' ')}
                 </h2>
-                
+
                 <div className="">
                   <p className="text-[#4D4D4D] font-urbanist text-xl lg:text-2xl max-w-sm leading-snug font-medium">
                     {data[activeIndex].description}
@@ -118,23 +118,23 @@ const Consultation = () => {
           <div className="hidden lg:flex col-span-2 items-start justify-end gap-10 pt-12">
             {/* Progress Track */}
             <div className="relative w-[4px] h-[340px] bg-gray-100 rounded-full">
-              <motion.div 
+              <motion.div
                 className="absolute top-0 left-0 w-full h-[100px] bg-[#FF6123] rounded-full z-50 shadow-[0_4px_15px_rgba(255,97,35,0.4)]"
-                style={{ 
-                    y: useTransform(smoothProgress, [0, 1], [0, 240])
+                style={{
+                  y: useTransform(smoothProgress, [0, 1], [0, 240])
                 }}
               />
             </div>
-            
+
             {/* Thumbnails */}
             <div className="flex flex-col gap-6">
               {data.map((item, index) => (
-                <div 
-                    key={index} 
-                    className={`w-[130px] h-[100px] overflow-hidden rounded-sm transition-all duration-500 border ${activeIndex === index ? 'border-[#FF6123] p-1 scale-105 shadow-md' : 'border-gray-100 p-0 opacity-40 shadow-none'}`}
+                <div
+                  key={index}
+                  className={`w-[130px] h-[100px] overflow-hidden rounded-sm transition-all duration-500 border ${activeIndex === index ? 'border-[#FF6123] p-1 scale-105 shadow-md' : 'border-gray-100 p-0 opacity-40 shadow-none'}`}
                 >
-                  <img 
-                    src={item.thumbnail} 
+                  <img
+                    src={item.thumbnail}
                     alt="nav"
                     className="w-full h-full object-cover"
                   />
